@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Бек & Софья — Save the Date</title>
+<meta name="description" content="Бек & Софья · Luna Garden, Бишкек · 12.07.2026" />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%239AA17F'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%23FAF5EA' text-anchor='middle'%3EБС%3C/text%3E%3C/svg%3E" />
+
+<!-- Marck Script (Cyrillic calligraphy) · EB Garamond + PT Serif (Cyrillic + Kazakh/Kyrgyz coverage) · Cormorant for numerals -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=PT+Serif:wght@400;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ivory:#FAF5EA;
+    --cream:#F2E9D6;
+    --gold:#A98C57;
+    --gold-deep:#8C7038;
+    --olive:#6B6A45;
+    --olive-soft:#8A845D;
+    --sage:#97A07C;
+    --sage-deep:#838C64;
+    --line:#CBC6A6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    background:var(--ivory);color:var(--olive);
+    font-family:'EB Garamond','PT Serif',Georgia,serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow:hidden;
+  }
+  img{display:block;max-width:100%;}
+
+  /* shared type */
+  .smallcaps{font-variant:small-caps;letter-spacing:.16em;}
+  .script{font-family:'Marck Script',cursive;color:var(--gold);font-weight:400;line-height:1.05;}
+  .eyebrow{font-variant:small-caps;letter-spacing:.30em;font-size:clamp(13px,2.7vw,17px);color:var(--gold);}
+  .serif-cap{font-variant:small-caps;letter-spacing:.10em;color:var(--olive);}
+
+  /* ---------- language toggle ---------- */
+  .lang{position:fixed;top:0;left:0;right:0;z-index:120;display:flex;justify-content:center;gap:6px;
+    padding:13px 10px;background:linear-gradient(rgba(250,245,234,.92) 55%,rgba(250,245,234,0));}
+  .lang button{font-family:'EB Garamond',serif;font-size:13px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--olive);background:rgba(250,245,234,.6);border:1px solid var(--line);border-radius:999px;
+    padding:6px 15px;cursor:pointer;transition:all .25s ease;}
+  .lang button:hover{border-color:var(--sage);color:var(--gold-deep);}
+  .lang button.active{background:var(--sage);border-color:var(--sage);color:#fff;}
+  @media(max-width:440px){.lang button{padding:5px 10px;font-size:11px;letter-spacing:.08em;}}
+
+  /* ---------- opening letter overlay ---------- */
+  #intro{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:78px 22px 40px;overflow:hidden;
+    background:var(--ivory);transition:transform 1.05s cubic-bezier(.7,0,.2,1),opacity 1.05s ease;}
+  #intro .bg{position:absolute;inset:0;background:url('assets/29fa99195a0e258212f841317c595d0a.png') center/cover no-repeat;
+    opacity:.30;filter:saturate(.92);}
+  #intro .veil{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(250,245,234,.55),rgba(250,245,234,.86) 78%);}
+  #intro .inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;}
+  #intro .eyebrow{margin-bottom:6px;}
+  #intro .names{font-family:'Marck Script',cursive;color:var(--gold);font-size:clamp(46px,11vw,86px);margin-bottom:24px;}
+  .envelope{position:relative;width:clamp(260px,42vw,400px);filter:drop-shadow(0 26px 30px rgba(120,110,70,.28));
+    cursor:pointer;transition:transform .9s ease,opacity .9s ease;}
+  .envelope .env-img{width:100%;border-radius:4px;}
+  .envelope .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);width:31%;
+    transition:transform .8s ease,opacity .8s ease;}
+  .envelope:hover{transform:translateY(-4px) scale(1.012);}
+  .open-btn{margin-top:30px;font-family:'EB Garamond',serif;font-variant:small-caps;letter-spacing:.20em;
+    font-size:clamp(15px,3vw,18px);color:#fff;background:var(--sage);border:none;border-radius:999px;
+    padding:14px 34px;cursor:pointer;transition:transform .2s ease,background .25s ease,box-shadow .2s ease;
+    box-shadow:0 12px 24px -12px rgba(110,106,69,.7);}
+  .open-btn:hover{background:var(--sage-deep);transform:translateY(-2px);}
+  #intro.opened{transform:translateY(-104%);opacity:0;pointer-events:none;}
+  #intro.opening .envelope{transform:scale(1.06);opacity:0;}
+  #intro.opening .seal{transform:translate(-50%,-160%) rotate(-14deg);opacity:0;}
+
+  /* ---------- book / scenes ---------- */
+  #book{height:100vh;height:100svh;overflow-y:scroll;scroll-snap-type:y proximity;scroll-behavior:smooth;}
+  .scene{position:relative;min-height:100vh;min-height:100svh;scroll-snap-align:start;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    padding:96px 24px 72px;overflow:hidden;}
+  .scene .wrap{position:relative;z-index:3;max-width:680px;width:100%;}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity 1s ease,transform 1s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* floral decoration */
+  .floral{position:absolute;z-index:1;pointer-events:none;opacity:.96;
+    filter:drop-shadow(0 10px 16px rgba(120,110,70,.16));}
+  .floral.tr{top:-26px;right:-40px;width:clamp(150px,30vw,310px);transform:rotate(8deg);}
+  .floral.bl{bottom:-30px;left:-44px;width:clamp(150px,30vw,300px);transform:scaleX(-1) rotate(6deg);}
+  @media(max-width:560px){.floral{opacity:.85;}.floral.tr{width:150px;right:-46px;}.floral.bl{width:140px;left:-50px;}}
+
+  hr.rule{border:none;border-top:1px solid var(--line);width:120px;margin:26px auto;}
+
+  /* scene 1 — save the date card */
+  .std-card{position:relative;background:var(--cream);padding:14px;border-radius:6px;
+    box-shadow:0 22px 50px -26px rgba(110,106,69,.6);max-width:430px;margin:0 auto;}
+  .std-card::before{content:"";position:absolute;inset:0;border-radius:6px;padding:13px;
+    background:repeating-linear-gradient(135deg,var(--sage) 0 11px,transparent 11px 22px);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;opacity:.9;}
+  .std-inner{position:relative;border:1px solid var(--sage);padding:34px 22px;}
+  .std-eyebrow{font-variant:small-caps;letter-spacing:.26em;color:var(--olive-soft);font-size:clamp(12px,2.6vw,15px);}
+  .std-title{font-family:'Marck Script',cursive;color:var(--gold);font-size:clamp(44px,12vw,78px);line-height:.96;margin:6px 0 10px;}
+  .std-names{font-variant:small-caps;letter-spacing:.18em;color:var(--olive);font-size:clamp(18px,4.4vw,26px);}
+  .std-date{font-family:'Cormorant Garamond',serif;letter-spacing:.24em;color:var(--gold-deep);font-size:clamp(17px,4vw,23px);margin-top:8px;}
+  /* scene 1 photo collage */
+  .collage{position:relative;display:flex;flex-direction:column;align-items:center;gap:20px;}
+  .frame{width:138px;background:#fff;box-shadow:0 18px 32px -16px rgba(110,106,69,.55);}
+  .frame img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--cream);}
+  .frame-arch{padding:7px;background:#f4edda;border:1px solid var(--sage);border-radius:96px 96px 7px 7px;}
+  .frame-arch img{border-radius:90px 90px 3px 3px;}
+  .frame-poly{padding:7px 7px 22px;background:#fff;}
+  @media(min-width:900px){
+    .frame{position:absolute;width:clamp(152px,14vw,188px);}
+    .frame-arch.ph-left{left:-184px;top:30px;transform:rotate(-6deg);}
+    .frame-poly.ph-right{right:-176px;bottom:14px;transform:rotate(6deg);}
+  }
+
+  /* big script headings */
+  .lead-cap{font-variant:small-caps;letter-spacing:.20em;color:var(--olive);font-size:clamp(16px,3.4vw,21px);}
+  .place{font-family:'Marck Script',cursive;color:var(--gold);font-size:clamp(40px,11vw,76px);margin:.18em 0;}
+  .sub{color:var(--olive-soft);font-style:italic;font-size:clamp(15px,3vw,19px);}
+
+  .when{font-variant:small-caps;letter-spacing:.07em;color:var(--olive);font-size:clamp(18px,4vw,26px);line-height:1.55;}
+  .muted{color:var(--olive-soft);font-style:italic;font-size:clamp(15px,3vw,18px);margin-top:14px;}
+
+  /* countdown */
+  .cd-title{font-variant:small-caps;letter-spacing:.22em;color:var(--gold);font-size:clamp(14px,3vw,17px);margin-bottom:20px;}
+  .cd{display:flex;justify-content:center;gap:clamp(14px,5vw,44px);flex-wrap:wrap;}
+  .cd .num{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(38px,11vw,68px);line-height:1;color:var(--sage-deep);font-variant-numeric:tabular-nums;}
+  .cd .lbl{font-variant:small-caps;letter-spacing:.16em;font-size:clamp(11px,2.6vw,14px);color:var(--olive-soft);margin-top:7px;}
+
+  /* sage button (calendar) */
+  .cta{display:inline-flex;align-items:center;gap:10px;font-family:'EB Garamond',serif;font-variant:small-caps;
+    letter-spacing:.18em;font-size:clamp(15px,3vw,18px);color:#fff;background:var(--sage);border-radius:999px;
+    padding:16px 38px;text-decoration:none;transition:transform .2s ease,background .25s ease,box-shadow .2s ease;
+    box-shadow:0 14px 28px -14px rgba(110,106,69,.7);}
+  .cta:hover{background:var(--sage-deep);transform:translateY(-2px);}
+
+  /* venue / map */
+  .addr{font-style:italic;color:var(--olive-soft);font-size:clamp(15px,3.2vw,18px);margin:6px 0 22px;}
+  .map-btn{display:inline-flex;align-items:center;gap:9px;font-family:'EB Garamond',serif;font-variant:small-caps;
+    letter-spacing:.14em;font-size:clamp(14px,3vw,17px);color:var(--gold-deep);background:transparent;
+    border:1px solid var(--gold);border-radius:999px;padding:12px 26px;text-decoration:none;transition:all .25s ease;}
+  .map-btn:hover{background:var(--gold);color:#fff;}
+  .map-btn svg{width:17px;height:17px;}
+
+  /* closing */
+  #closing{color:#4b4733;}
+  #closing .bg{position:absolute;inset:0;background:url('assets/29fa99195a0e258212f841317c595d0a.png') center/cover no-repeat;}
+  #closing .veil{position:absolute;inset:0;background:linear-gradient(rgba(250,245,234,.66),rgba(250,245,234,.5));}
+  #closing .with-love{font-variant:small-caps;letter-spacing:.22em;color:var(--olive);font-size:clamp(16px,3.4vw,20px);}
+  #closing .sign{font-family:'Marck Script',cursive;color:var(--gold-deep);font-size:clamp(46px,12vw,84px);margin-top:4px;}
+  .return{display:inline-block;margin-top:26px;font-variant:small-caps;letter-spacing:.18em;color:var(--gold-deep);
+    text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px;font-size:clamp(13px,2.8vw,16px);}
+  .return:hover{color:var(--olive);}
+
+  .pagefoot{position:relative;z-index:3;margin-top:34px;color:var(--olive-soft);font-size:12px;letter-spacing:.12em;font-variant:small-caps;opacity:.8;}
+</style>
+</head>
+<body>
+
+  <!-- ===== language toggle ===== -->
+  <nav class="lang" aria-label="Тил / Тіл / Язык">
+    <button data-lang="kg">Кыргызча</button>
+    <button data-lang="kz">Қазақша</button>
+    <button data-lang="ru">Русский</button>
+  </nav>
+
+  <!-- ===== OPENING LETTER ===== -->
+  <section id="intro">
+    <div class="bg"></div><div class="veil"></div>
+    <div class="inner">
+      <p class="eyebrow" data-i18n="loveLetter">Письмо с любовью от</p>
+      <h1 class="names">Бек &amp; Софья</h1>
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open">
+        <img class="env-img" src="assets/7f09eabd8bcaf109eb5c1afc5cb3bf1a.png" alt="" />
+        <img class="seal" src="assets/d9ccdf19351f563c73bb962fb01de70f.png" alt="" />
+      </div>
+      <button class="open-btn" id="openBtn" data-i18n="openInvitation">Открыть приглашение</button>
+    </div>
+  </section>
+
+  <!-- ===== BOOK ===== -->
+  <main id="book">
+
+    <!-- Scene 1 — Save the Date -->
+    <section class="scene">
+      <img class="floral tr" src="assets/2ba9ddbf019629c9e665135d13065421.png" alt="" />
+      <div class="wrap reveal">
+        <div class="collage">
+          <div class="frame frame-arch ph-left"><img src="assets/81a594e507fe25ad2d1da79de559a3fe.jpg" alt="" loading="lazy" /></div>
+          <div class="std-card">
+            <div class="std-inner">
+              <p class="std-eyebrow" data-i18n="saveTheDate">Сохраните дату</p>
+              <p class="std-title">Бек <span style="font-style:normal">&amp;</span> Софья</p>
+              <p class="std-names">Б &amp; С</p>
+              <p class="std-date">12 · 07 · 2026</p>
+            </div>
+          </div>
+          <div class="frame frame-poly ph-right"><img src="assets/6e0e698717c6428e445cb55d65e9ccd0.jpg" alt="" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scene 2 — Where -->
+    <section class="scene">
+      <img class="floral bl" src="assets/2ba9ddbf019629c9e665135d13065421.png" alt="" />
+      <div class="wrap reveal">
+        <p class="lead-cap" data-i18n="meetUsIn">Ждём вас в</p>
+        <p class="place">Luna Garden</p>
+        <p class="sub" data-i18n="city">Бишкек</p>
+        <hr class="rule" />
+        <p class="addr" data-i18n="venueAddress">Центральная ул., 1г, с. Кой-Таш, Бишкек</p>
+        <a class="map-btn" href="https://2gis.kg/bishkek/firm/70000001113003711" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span data-i18n="mapButton">Открыть в 2ГИС</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Scene 3 — When + countdown -->
+    <section class="scene">
+      <div class="wrap reveal">
+        <p class="when"><span data-i18n="whenLine">воскресенье, 12 июля 2026</span><br>
+        <span data-i18n="timeLine">Начало в 15:00</span></p>
+        <p class="muted" data-i18n="formalFollow">Официальное приглашение последует.</p>
+        <hr class="rule" />
+        <p class="cd-title" data-i18n="cdTitle">До праздника осталось</p>
+        <div class="cd">
+          <div><div class="num" id="d">000</div><div class="lbl" data-i18n="days">Дней</div></div>
+          <div><div class="num" id="h">00</div><div class="lbl" data-i18n="hours">Часов</div></div>
+          <div><div class="num" id="m">00</div><div class="lbl" data-i18n="minutes">Минут</div></div>
+          <div><div class="num" id="s">00</div><div class="lbl" data-i18n="seconds">Секунд</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scene 4 — Calendar / celebrate -->
+    <section class="scene">
+      <img class="floral tr" src="assets/2ba9ddbf019629c9e665135d13065421.png" alt="" />
+      <div class="wrap reveal">
+        <a class="cta" id="calBtn" target="_blank" rel="noopener"
+           href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D0%91%D0%B5%D0%BA%20%26%20%D0%A1%D0%BE%D1%84%D1%8C%D1%8F%20%E2%80%94%20%D0%A1%D0%B2%D0%B0%D0%B4%D1%8C%D0%B1%D0%B0&dates=20260712T090000Z/20260712T140000Z&location=Luna%20Garden%2C%20%D0%9A%D0%BE%D0%B9-%D0%A2%D0%B0%D1%88%2C%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA&details=Luna%20Garden%2C%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA">
+          <span data-i18n="addCalendar">Добавить в календарь</span>
+        </a>
+        <hr class="rule" />
+        <p class="lead-cap" data-i18n="celebrate">Будем счастливы разделить этот день вместе с вами.</p>
+      </div>
+    </section>
+
+    <!-- Scene 5 — Closing -->
+    <section class="scene" id="closing">
+      <div class="bg"></div><div class="veil"></div>
+      <div class="wrap reveal">
+        <p class="with-love" data-i18n="withLove">С любовью,</p>
+        <p class="sign">Бек &amp; Софья</p>
+        <a class="return" id="returnTop" data-i18n="returnTop" href="#">Вернуться к началу</a>
+      </div>
+      <div class="pagefoot">Б &amp; С · 12.07.2026 · Luna Garden</div>
+    </section>
+
+  </main>
+
+<script>
+  // ===== target: 12 July 2026, 17:00 Bishkek (UTC+6) =====
+  const TARGET = new Date('2026-07-12T15:00:00+06:00');
+
+  const I18N = {
+    kg:{
+      loveLetter:"Сүйүү каты",
+      openInvitation:"Чакырууну ачуу",
+      saveTheDate:"Бул күндү эсте сактаңыз",
+      meetUsIn:"Сиздерди күтөбүз:",
+      city:"Бишкек",
+      venueAddress:"Борбордук көчө, 1г, Кой-Таш айылы, Бишкек",
+      mapButton:"2ГИСтен кароо",
+      whenLine:"12-июль 2026, жекшемби күнү",
+      timeLine:"Башталышы: саат 15:00",
+      formalFollow:"Расмий чакыруу кийинчерээк жөнөтүлөт.",
+      cdTitle:"Тойго чейин калды",
+      days:"Күн",hours:"Саат",minutes:"Мүнөт",seconds:"Секунд",
+      addCalendar:"Календарга кошуу",
+      celebrate:"Бул кубанычты сиздер менен бөлүшүүнү чыдамсыздык менен күтөбүз.",
+      withLove:"Сүйүү менен,",
+      returnTop:"Башына кайтуу"
+    },
+    kz:{
+      loveLetter:"Сүйіспеншілік хаты",
+      openInvitation:"Шақыруды ашу",
+      saveTheDate:"Бұл күнді есте сақтаңыз",
+      meetUsIn:"Сіздерді күтеміз:",
+      city:"Бішкек",
+      venueAddress:"Орталық көше, 1г, Қой-Таш ауылы, Бішкек",
+      mapButton:"2ГИС-тен қарау",
+      whenLine:"2026 жылғы 12 шілде, жексенбі",
+      timeLine:"Басталуы: сағат 15:00",
+      formalFollow:"Ресми шақыру кейінірек жіберіледі.",
+      cdTitle:"Тойға дейін қалды",
+      days:"Күн",hours:"Сағат",minutes:"Минут",seconds:"Секунд",
+      addCalendar:"Күнтізбеге қосу",
+      celebrate:"Бұл қуанышты сіздермен бірге тойлауды асыға күтеміз.",
+      withLove:"Сүйіспеншілікпен,",
+      returnTop:"Басына оралу"
+    },
+    ru:{
+      loveLetter:"Письмо с любовью от",
+      openInvitation:"Открыть приглашение",
+      saveTheDate:"Сохраните дату",
+      meetUsIn:"Будем рады видеть вас в",
+      city:"Бишкек",
+      venueAddress:"Центральная ул., 1г, с. Кой-Таш, Бишкек",
+      mapButton:"Открыть в 2ГИС",
+      whenLine:"воскресенье, 12 июля 2026",
+      timeLine:"Начало в 15:00",
+      formalFollow:"Официальное приглашение последует.",
+      cdTitle:"До праздника осталось",
+      days:"Дней",hours:"Часов",minutes:"Минут",seconds:"Секунд",
+      addCalendar:"Добавить в календарь",
+      celebrate:"Будем счастливы разделить этот день вместе с вами.",
+      withLove:"С любовью,",
+      returnTop:"Вернуться к началу"
+    }
+  };
+
+  function setLang(lang){
+    const d=I18N[lang]; if(!d) return;
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const k=el.getAttribute('data-i18n'); if(d[k]!==undefined) el.textContent=d[k];
+    });
+    document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+    try{localStorage.setItem('std-lang',lang);}catch(e){}
+  }
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();setLang(b.dataset.lang);}));
+  let saved='ru'; try{saved=localStorage.getItem('std-lang')||'ru';}catch(e){}
+  setLang(saved);
+
+  // ===== opening letter =====
+  const intro=document.getElementById('intro');
+  const book=document.getElementById('book');
+  function openLetter(){
+    if(intro.classList.contains('opening'))return;
+    intro.classList.add('opening');
+    setTimeout(()=>{intro.classList.add('opened');document.body.style.overflow='';},650);
+    setTimeout(()=>{intro.style.display='none';},1750);
+  }
+  document.getElementById('openBtn').addEventListener('click',openLetter);
+  document.getElementById('envelope').addEventListener('click',openLetter);
+  document.getElementById('envelope').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLetter();}});
+
+  // return to top -> replay intro
+  document.getElementById('returnTop').addEventListener('click',e=>{
+    e.preventDefault();
+    book.scrollTo({top:0,behavior:'smooth'});
+    intro.style.display='flex';
+    requestAnimationFrame(()=>{intro.classList.remove('opened','opening');document.body.style.overflow='hidden';});
+  });
+
+  // ===== reveal on scroll =====
+  const io=new IntersectionObserver((ents)=>{
+    ents.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in');});
+  },{root:book,threshold:.18});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // first scene visible immediately once opened
+  document.querySelector('.scene .reveal').classList.add('in');
+
+  // ===== countdown =====
+  const pad=(n,l)=>String(n).padStart(l,'0');
+  function tick(){
+    const diff=TARGET-new Date();
+    if(diff<=0){document.getElementById('d').textContent='000';['h','m','s'].forEach(i=>document.getElementById(i).textContent='00');return;}
+    document.getElementById('d').textContent=pad(Math.floor(diff/86400000),3);
+    document.getElementById('h').textContent=pad(Math.floor(diff/3600000)%24,2);
+    document.getElementById('m').textContent=pad(Math.floor(diff/60000)%60,2);
+    document.getElementById('s').textContent=pad(Math.floor(diff/1000)%60,2);
+  }
+  tick(); setInterval(tick,1000);
+</script>
+</body>
+</html>
