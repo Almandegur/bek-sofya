@@ -104,9 +104,10 @@
 
   hr.rule{border:none;border-top:1px solid var(--line);width:120px;margin:24px auto;}
 
-  /* hero (real capture of the original collage) */
-  .hero-scene{padding-top:80px;}
-  .hero-img{display:block;width:100%;max-width:1100px;height:auto;margin:0 auto;}
+  /* hero (real capture of the original collage) — fills the frame */
+  .hero-scene{padding:84px 16px 26px;}
+  .hero-scene .wrap{max-width:none;}
+  .hero-img{display:block;width:auto;max-width:100%;height:auto;max-height:calc(100svh - 124px);margin:0 auto;}
 
   /* save-the-date collage */
   .collage{position:relative;display:flex;flex-direction:column;align-items:center;gap:24px;}
@@ -165,6 +166,12 @@
     text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px;font-size:clamp(15px,3vw,19px);cursor:pointer;}
   .return:hover{color:var(--olive);}
   .pagefoot{position:relative;z-index:3;margin-top:30px;font-family:var(--serif);font-weight:300;color:var(--olive);font-size:14px;letter-spacing:.10em;opacity:.85;}
+
+  /* mobile only: merge frame 3 (date + countdown) and frame 4 (RSVP button) into one screen */
+  @media(max-width:700px){
+    #book .scene:nth-of-type(3){min-height:auto;padding:90px 24px 12px;}
+    #book .scene:nth-of-type(4){min-height:auto;padding:6px 24px 48px;scroll-snap-align:none;}
+  }
 
   /* ===== PAGE 3 — RSVP (slides in) ===== */
   #rsvpPage{position:fixed;inset:0;z-index:160;background:var(--ivory);overflow-y:auto;
