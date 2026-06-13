@@ -32,7 +32,7 @@
   @keyframes sealDrop{0%{opacity:0;transform:translateY(-30px) scale(.88);}60%{transform:translateY(4px) scale(1.02);}100%{opacity:1;transform:none;}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
   @keyframes envIn{0%{opacity:0;transform:translateY(46px) scale(.93);}60%{opacity:1;}100%{opacity:1;transform:translateY(0) scale(1);}}
-  @keyframes sealStamp{0%{opacity:0;transform:translate(-50%,-46%) scale(1.5) rotate(-6deg);}55%{opacity:1;}72%{transform:translate(-50%,-46%) scale(.93) rotate(1deg);}100%{opacity:1;transform:translate(-50%,-46%) scale(1) rotate(0);}}
+  @keyframes sealStamp{0%{opacity:0;transform:translate(-50%,-50%) scale(1.5) rotate(-6deg);}55%{opacity:1;}72%{transform:translate(-50%,-50%) scale(.93) rotate(1deg);}100%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0);}}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;}}
 
   /* ===== language toggle ===== */
@@ -69,10 +69,10 @@
   .wedding-line{font-family:var(--serif);font-weight:300;color:var(--gold);font-size:clamp(17px,3.6vw,24px);letter-spacing:.03em;margin:2px 0 22px;}
   .eyebrow{font-family:var(--serif);font-weight:300;letter-spacing:.16em;color:var(--gold);font-size:clamp(18px,4vw,30px);}
   #intro .names{font-family:var(--script);color:var(--gold);font-size:clamp(46px,10vw,86px);margin:2px 0 6px;}
-  .envelope{position:relative;width:min(clamp(220px,72vw,310px),30vh);filter:drop-shadow(0 26px 30px rgba(110,98,60,.3));cursor:pointer;}
+  .envelope{position:relative;width:min(clamp(250px,84vw,380px),46vh);filter:drop-shadow(0 22px 26px rgba(110,98,60,.28));cursor:pointer;}
   .env-float{animation:floatEnv 5.5s ease-in-out infinite;transition:transform .9s ease,opacity .9s ease;}
   .envelope .env-img{width:100%;border-radius:4px;}
-  .envelope .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);width:31%;transition:transform .8s ease,opacity .8s ease;}
+  .envelope .seal{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:26%;transition:transform .8s ease,opacity .8s ease;}
   .envelope:hover .env-float{transform:translateY(-5px) scale(1.015);}
   .open-btn{margin-top:28px;font-family:var(--serif);letter-spacing:.12em;font-size:clamp(17px,3.4vw,22px);
     color:#fff;background:var(--sage);border:none;border-radius:999px;padding:13px 34px;cursor:pointer;
@@ -80,10 +80,10 @@
   .open-btn:hover{background:var(--sage-deep);transform:translateY(-2px);}
   #intro.opened{transform:translateY(-104%);opacity:0;pointer-events:none;}
   #intro.opening .env-float{transform:scale(1.06);opacity:0;}
-  #intro.opening .seal{transform:translate(-50%,-160%) rotate(-14deg);opacity:0;}
+  #intro.opening .seal{transform:translate(-50%,-260%) rotate(-14deg);opacity:0;}
 
   /* ===== PAGE 2 — info (scroll) ===== */
-  #book{height:100vh;height:100svh;overflow-y:scroll;scroll-snap-type:y proximity;scroll-behavior:smooth;}
+  #book{height:100vh;height:100svh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
   .scene{position:relative;min-height:100vh;min-height:100svh;scroll-snap-align:start;
     display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:92px 24px 72px;overflow:hidden;}
   .scene .wrap{position:relative;z-index:3;max-width:680px;width:100%;}
@@ -214,7 +214,7 @@
       <p class="wedding-line" data-i18n="weddingLine">приглашают вас на свою свадьбу</p>
       <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open">
         <div class="env-float">
-          <img class="env-img" src="assets/7f09eabd8bcaf109eb5c1afc5cb3bf1a.png" alt="" />
+          <img class="env-img" src="assets/envelope.png" alt="" />
           <img class="seal" src="assets/d9ccdf19351f563c73bb962fb01de70f.png" alt="" />
         </div>
       </div>
