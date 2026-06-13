@@ -15,15 +15,9 @@
   @font-face{font-family:'Cormorant SC';font-weight:300;font-style:normal;src:url('assets/fonts/CormorantSC-Light.woff2') format('woff2');font-display:swap;}
 
   :root{
-    --ivory:#FFFAF4;
-    --cream:#F3EAD8;
-    --gold:#786938;
-    --olive:#827E4A;
-    --sage:#A2A78C;
-    --sage-deep:#8C9176;
-    --line:#CFCAA8;
-    --script:'Brittany',cursive;
-    --serif:'Cormorant SC','Cormorant Garamond',Georgia,serif;
+    --ivory:#FFFAF4; --cream:#F3EAD8; --gold:#786938; --olive:#827E4A;
+    --sage:#A2A78C; --sage-deep:#8C9176; --line:#CFCAA8;
+    --script:'Brittany',cursive; --serif:'Cormorant SC','Cormorant Garamond',Georgia,serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{height:100%;}
@@ -31,53 +25,67 @@
     -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow:hidden;}
   img{display:block;max-width:100%;}
 
-  .script{font-family:var(--script);color:var(--gold);line-height:1.02;}
-  .cap{font-family:var(--serif);font-weight:400;}
+  /* ===== animations ===== */
+  @keyframes floatTR{0%,100%{transform:rotate(8deg) translateY(0);}50%{transform:rotate(8deg) translateY(-12px);}}
+  @keyframes floatBL{0%,100%{transform:scaleX(-1) rotate(6deg) translateY(0);}50%{transform:scaleX(-1) rotate(6deg) translateY(-12px);}}
+  @keyframes floatEnv{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+  @keyframes sealDrop{0%{opacity:0;transform:translateY(-30px) scale(.88);}60%{transform:translateY(4px) scale(1.02);}100%{opacity:1;transform:none;}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;}}
 
   /* ===== language toggle ===== */
-  .lang{position:fixed;top:0;left:0;right:0;z-index:120;display:flex;justify-content:center;gap:6px;
+  .lang{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;gap:6px;
     padding:13px 10px;background:linear-gradient(rgba(255,250,244,.94) 55%,rgba(255,250,244,0));}
   .lang button{font-family:var(--serif);font-size:16px;letter-spacing:.10em;color:var(--gold);
-    background:rgba(255,250,244,.6);border:1px solid var(--line);border-radius:999px;
-    padding:5px 16px;cursor:pointer;transition:all .25s ease;}
+    background:rgba(255,250,244,.6);border:1px solid var(--line);border-radius:999px;padding:5px 16px;cursor:pointer;transition:all .25s ease;}
   .lang button:hover{border-color:var(--sage);}
   .lang button.active{background:var(--sage);border-color:var(--sage);color:#fff;}
   @media(max-width:440px){.lang button{padding:4px 11px;font-size:14px;}}
 
-  /* ===== PAGE 1 — opening letter ===== */
-  #intro{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  /* ===== PAGE 1 — letter ===== */
+  #intro{position:fixed;inset:0;z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding:74px 22px 38px;overflow:hidden;background:var(--ivory);
     transition:transform 1.05s cubic-bezier(.7,0,.2,1),opacity 1.05s ease;}
   #intro .bg{position:absolute;inset:0;background:url('assets/29fa99195a0e258212f841317c595d0a.png') center/cover no-repeat;opacity:.3;}
   #intro .veil{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(255,250,244,.5),rgba(255,250,244,.85) 78%);}
   #intro .inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;}
+  #intro .inner>*{animation:fadeUp 1s both;}
+  #intro .inner>*:nth-child(2){animation-delay:.15s;}
+  #intro .inner>*:nth-child(3){animation-delay:.3s;}
+  #intro .inner>*:nth-child(4){animation-delay:.5s;}
   .eyebrow{font-family:var(--serif);font-weight:300;letter-spacing:.16em;color:var(--gold);font-size:clamp(18px,4vw,30px);}
   #intro .names{font-family:var(--script);color:var(--gold);font-size:clamp(58px,15vw,120px);margin:2px 0 22px;}
-  .envelope{position:relative;width:clamp(258px,42vw,400px);filter:drop-shadow(0 26px 30px rgba(110,98,60,.3));
-    cursor:pointer;transition:transform .9s ease,opacity .9s ease;}
+  .envelope{position:relative;width:clamp(258px,42vw,400px);filter:drop-shadow(0 26px 30px rgba(110,98,60,.3));cursor:pointer;}
+  .env-float{animation:floatEnv 5.5s ease-in-out infinite;transition:transform .9s ease,opacity .9s ease;}
   .envelope .env-img{width:100%;border-radius:4px;}
   .envelope .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);width:31%;transition:transform .8s ease,opacity .8s ease;}
-  .envelope:hover{transform:translateY(-4px) scale(1.012);}
+  .envelope:hover .env-float{transform:translateY(-5px) scale(1.015);}
   .open-btn{margin-top:28px;font-family:var(--serif);letter-spacing:.12em;font-size:clamp(17px,3.4vw,22px);
     color:#fff;background:var(--sage);border:none;border-radius:999px;padding:13px 34px;cursor:pointer;
     transition:transform .2s ease,background .25s ease;box-shadow:0 12px 24px -12px rgba(110,98,60,.7);}
   .open-btn:hover{background:var(--sage-deep);transform:translateY(-2px);}
   #intro.opened{transform:translateY(-104%);opacity:0;pointer-events:none;}
-  #intro.opening .envelope{transform:scale(1.06);opacity:0;}
+  #intro.opening .env-float{transform:scale(1.06);opacity:0;}
   #intro.opening .seal{transform:translate(-50%,-160%) rotate(-14deg);opacity:0;}
 
   /* ===== PAGE 2 — info (scroll) ===== */
   #book{height:100vh;height:100svh;overflow-y:scroll;scroll-snap-type:y proximity;scroll-behavior:smooth;}
   .scene{position:relative;min-height:100vh;min-height:100svh;scroll-snap-align:start;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-    padding:92px 24px 72px;overflow:hidden;}
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:92px 24px 72px;overflow:hidden;}
   .scene .wrap{position:relative;z-index:3;max-width:680px;width:100%;}
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity 1s ease,transform 1s ease;}
-  .reveal.in{opacity:1;transform:none;}
+  /* staggered reveal */
+  .reveal>*{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in>*{opacity:1;transform:none;}
+  .reveal.in>*:nth-child(1){transition-delay:.05s;}
+  .reveal.in>*:nth-child(2){transition-delay:.16s;}
+  .reveal.in>*:nth-child(3){transition-delay:.27s;}
+  .reveal.in>*:nth-child(4){transition-delay:.38s;}
+  .reveal.in>*:nth-child(5){transition-delay:.49s;}
+  .reveal.in>*:nth-child(6){transition-delay:.60s;}
 
   .floral{position:absolute;z-index:1;pointer-events:none;filter:drop-shadow(0 10px 16px rgba(110,98,60,.16));}
-  .floral.tr{top:-22px;right:-44px;width:clamp(150px,28vw,300px);transform:rotate(8deg);}
-  .floral.bl{bottom:-26px;left:-46px;width:clamp(150px,28vw,290px);transform:scaleX(-1) rotate(6deg);}
+  .floral.tr{top:-22px;right:-44px;width:clamp(150px,28vw,300px);transform:rotate(8deg);animation:floatTR 8s ease-in-out infinite;}
+  .floral.bl{bottom:-26px;left:-46px;width:clamp(150px,28vw,290px);transform:scaleX(-1) rotate(6deg);animation:floatBL 9s ease-in-out infinite;}
   @media(max-width:560px){.floral.tr{width:148px;right:-48px;}.floral.bl{width:140px;left:-52px;}}
 
   hr.rule{border:none;border-top:1px solid var(--line);width:120px;margin:24px auto;}
@@ -106,61 +114,68 @@
     .frame-poly.ph-right{right:-180px;bottom:12px;transform:rotate(6deg);}
   }
 
-  /* venue + when */
   .lead{font-family:var(--serif);letter-spacing:.04em;color:var(--gold);font-size:clamp(22px,5vw,33px);}
   .place{font-family:var(--script);color:var(--gold);font-size:clamp(48px,13vw,80px);margin:.05em 0;}
   .place-sub{font-family:var(--serif);font-weight:300;color:var(--gold);font-size:clamp(20px,4.4vw,28px);}
   .addr{font-family:var(--serif);font-weight:300;color:var(--olive);font-size:clamp(16px,3.4vw,20px);margin:4px 0 22px;letter-spacing:.02em;}
   .when{font-family:var(--serif);color:var(--gold);font-size:clamp(20px,4.6vw,30px);line-height:1.5;}
   .muted{font-family:var(--serif);font-weight:300;color:var(--olive);font-size:clamp(16px,3.2vw,20px);margin-top:12px;}
+  .calx{display:inline-block;margin-top:18px;font-family:var(--serif);letter-spacing:.06em;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;font-size:clamp(15px,3vw,19px);}
+  .calx:hover{color:var(--olive);}
 
-  /* countdown */
   .cd-title{font-family:var(--serif);letter-spacing:.16em;color:var(--gold);font-size:clamp(16px,3.4vw,22px);margin-bottom:20px;}
   .cd{display:flex;justify-content:center;gap:clamp(14px,5vw,46px);flex-wrap:wrap;}
   .cd .num{font-family:'Cormorant SC','Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,11vw,68px);line-height:1;color:var(--olive);font-variant-numeric:tabular-nums;}
   .cd .lbl{font-family:var(--serif);letter-spacing:.10em;font-size:clamp(13px,3vw,20px);color:var(--olive);margin-top:6px;}
 
-  /* sage CTA */
   .cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--serif);letter-spacing:.10em;
-    font-size:clamp(17px,3.4vw,22px);color:#fff;background:var(--sage);border:none;border-radius:999px;
-    padding:14px 38px;text-decoration:none;cursor:pointer;transition:transform .2s ease,background .25s ease;
-    box-shadow:0 14px 28px -14px rgba(110,98,60,.7);}
+    font-size:clamp(17px,3.4vw,22px);color:#fff;background:var(--sage);border:none;border-radius:999px;padding:14px 38px;
+    text-decoration:none;cursor:pointer;transition:transform .2s ease,background .25s ease;box-shadow:0 14px 28px -14px rgba(110,98,60,.7);}
   .cta:hover{background:var(--sage-deep);transform:translateY(-2px);}
 
-  /* 2GIS map button */
   .map-btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--serif);letter-spacing:.06em;
     font-size:clamp(16px,3.2vw,21px);color:var(--gold);background:transparent;border:1px solid var(--gold);
     border-radius:999px;padding:11px 26px;text-decoration:none;transition:all .25s ease;}
   .map-btn:hover{background:var(--gold);color:#fff;}
   .map-btn svg{width:17px;height:17px;}
 
-  /* ===== RSVP form ===== */
-  .rsvp{display:flex;flex-direction:column;gap:13px;max-width:430px;margin:24px auto 0;text-align:left;}
-  .fld{font-family:Georgia,serif;font-size:16px;color:#5d5634;background:rgba(255,255,255,.65);
-    border:1px solid var(--line);border-radius:12px;padding:13px 16px;width:100%;}
-  .fld::placeholder{color:#a99f78;}
-  .fld:focus{outline:none;border-color:var(--sage);background:#fff;}
-  textarea.fld{resize:vertical;min-height:74px;}
-  .attend{display:flex;gap:10px;}
-  .attend input{position:absolute;opacity:0;pointer-events:none;}
-  .attend label{flex:1;text-align:center;cursor:pointer;font-family:var(--serif);letter-spacing:.04em;font-size:17px;
-    border:1px solid var(--line);border-radius:12px;padding:12px 8px;color:var(--olive);transition:all .2s ease;}
-  .attend input:checked + label{background:var(--sage);border-color:var(--sage);color:#fff;}
-  .guests-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:12px;padding:7px 16px;}
-  .glbl{font-family:var(--serif);letter-spacing:.04em;color:var(--gold);font-size:18px;}
-  .num-in{width:88px;font-family:Georgia,serif;font-size:17px;text-align:center;color:#5d5634;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px;}
-  .rsvp .cta{align-self:center;margin-top:6px;}
-  .rsvp-status{margin-top:16px;font-family:var(--serif);letter-spacing:.04em;color:var(--gold);font-size:clamp(18px,4vw,24px);min-height:1.4em;}
-
-  /* closing */
   #closing .bg{position:absolute;inset:0;background:url('assets/29fa99195a0e258212f841317c595d0a.png') center/cover no-repeat;}
   #closing .veil{position:absolute;inset:0;background:linear-gradient(rgba(255,250,244,.6),rgba(255,250,244,.46));}
-  #closing .with-love{font-family:var(--serif);letter-spacing:.06em;color:var(--gold);font-size:clamp(22px,4.6vw,28px);}
-  #closing .sign{font-family:var(--script);color:var(--gold);font-size:clamp(56px,15vw,104px);margin-top:0;}
+  .with-love{font-family:var(--serif);letter-spacing:.06em;color:var(--gold);font-size:clamp(22px,4.6vw,28px);}
+  .sign{font-family:var(--script);color:var(--gold);font-size:clamp(56px,15vw,104px);}
   .return{display:inline-block;margin-top:22px;font-family:var(--serif);letter-spacing:.08em;color:var(--gold);
-    text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px;font-size:clamp(15px,3vw,19px);}
+    text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px;font-size:clamp(15px,3vw,19px);cursor:pointer;}
   .return:hover{color:var(--olive);}
   .pagefoot{position:relative;z-index:3;margin-top:30px;font-family:var(--serif);font-weight:300;color:var(--olive);font-size:14px;letter-spacing:.10em;opacity:.85;}
+
+  /* ===== PAGE 3 — RSVP (slides in) ===== */
+  #rsvpPage{position:fixed;inset:0;z-index:160;background:var(--ivory);overflow-y:auto;
+    transform:translateX(100%);transition:transform .85s cubic-bezier(.7,0,.2,1);}
+  #rsvpPage.open{transform:translateX(0);}
+  .rsvp-wrap{max-width:560px;margin:0 auto;padding:96px 24px 70px;text-align:center;}
+  #rsvpPage.open .seal3{animation:sealDrop 1s .15s both;}
+  #rsvpPage.open .ranim{animation:fadeUp .9s both;}
+  #rsvpPage.open .ranim.d2{animation-delay:.3s;}
+  #rsvpPage.open .ranim.d3{animation-delay:.45s;}
+  .seal3{width:clamp(120px,22vw,168px);margin:0 auto 22px;}
+  .rhead{font-family:var(--serif);color:var(--gold);font-size:clamp(20px,4.4vw,30px);line-height:1.45;}
+  .rcard{background:#fff;border-radius:18px;box-shadow:0 26px 60px -34px rgba(110,98,60,.6);
+    padding:clamp(24px,5vw,40px);margin:28px auto 0;text-align:left;display:flex;flex-direction:column;gap:8px;}
+  .flabel{font-family:var(--serif);color:var(--gold);font-size:clamp(17px,3.6vw,22px);margin:12px 0 4px;}
+  .flabel:first-child{margin-top:0;}
+  .fld{font-family:Georgia,serif;font-size:16px;color:#5d5634;background:#fff;border:1px solid var(--line);
+    border-radius:10px;padding:13px 15px;width:100%;}
+  .fld:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(162,167,140,.18);}
+  textarea.fld{resize:vertical;min-height:90px;}
+  .attend{display:flex;gap:10px;}
+  .attend input{position:absolute;opacity:0;pointer-events:none;}
+  .attend label{flex:1;text-align:center;cursor:pointer;font-family:var(--serif);font-size:17px;letter-spacing:.02em;
+    border:1px solid var(--line);border-radius:10px;padding:12px 8px;color:var(--olive);transition:all .2s ease;}
+  .attend input:checked + label{background:var(--sage);border-color:var(--sage);color:#fff;}
+  .num{max-width:130px;}
+  .rsvp-submit{align-self:center;margin-top:20px;}
+  .rsvp-status{margin-top:16px;font-family:var(--serif);color:var(--gold);font-size:clamp(18px,4vw,24px);min-height:1.4em;}
+  .rclose{margin-top:46px;}
 </style>
 </head>
 <body>
@@ -178,8 +193,10 @@
       <p class="eyebrow" data-i18n="loveLetter">Письмо с любовью от</p>
       <h1 class="names">Bek &amp; Sofya</h1>
       <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open">
-        <img class="env-img" src="assets/7f09eabd8bcaf109eb5c1afc5cb3bf1a.png" alt="" />
-        <img class="seal" src="assets/d9ccdf19351f563c73bb962fb01de70f.png" alt="" />
+        <div class="env-float">
+          <img class="env-img" src="assets/7f09eabd8bcaf109eb5c1afc5cb3bf1a.png" alt="" />
+          <img class="seal" src="assets/d9ccdf19351f563c73bb962fb01de70f.png" alt="" />
+        </div>
       </div>
       <button class="open-btn" id="openBtn" data-i18n="openInvitation">Открыть приглашение</button>
     </div>
@@ -188,7 +205,6 @@
   <!-- ===== PAGE 2 — INFO ===== -->
   <main id="book">
 
-    <!-- Save the Date -->
     <section class="scene">
       <img class="floral tr" src="assets/2ba9ddbf019629c9e665135d13065421.png" alt="" />
       <div class="wrap reveal">
@@ -209,7 +225,6 @@
       </div>
     </section>
 
-    <!-- Venue -->
     <section class="scene">
       <img class="floral bl" src="assets/2ba9ddbf019629c9e665135d13065421.png" alt="" />
       <div class="wrap reveal">
@@ -225,7 +240,6 @@
       </div>
     </section>
 
-    <!-- When + countdown -->
     <section class="scene">
       <div class="wrap reveal">
         <p class="when"><span data-i18n="whenLine">воскресенье, 12 июля 2026</span><br>
@@ -239,59 +253,70 @@
           <div><div class="num" id="m">00</div><div class="lbl" data-i18n="minutes">Минут</div></div>
           <div><div class="num" id="s">00</div><div class="lbl" data-i18n="seconds">Секунд</div></div>
         </div>
+        <a class="calx" target="_blank" rel="noopener"
+           href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Bek%20%26%20Sofya%20%E2%80%94%20%D0%A1%D0%B2%D0%B0%D0%B4%D1%8C%D0%B1%D0%B0&dates=20260712T090000Z/20260712T140000Z&location=Luna%20Garden%2C%20%D0%9A%D0%BE%D0%B9-%D0%A2%D0%B0%D1%88%2C%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA&details=Luna%20Garden%2C%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA"><span data-i18n="addCalendar">Добавить в календарь</span></a>
       </div>
     </section>
 
-    <!-- RSVP form -->
     <section class="scene">
       <img class="floral tr" src="assets/2ba9ddbf019629c9e665135d13065421.png" alt="" />
       <div class="wrap reveal">
-        <p class="lead" data-i18n="rsvpTitle">Подтвердите участие</p>
-        <p class="muted" data-i18n="rsvpSub">Будем признательны за ваш ответ</p>
-        <form id="rsvpForm" class="rsvp">
-          <input class="fld" type="text" name="name" data-i18n-ph="fName" placeholder="Имя и фамилия" required />
-          <div class="attend">
-            <input type="radio" id="att-yes" name="attend" value="yes" checked />
-            <label for="att-yes" data-i18n="aYes">С радостью приду</label>
-            <input type="radio" id="att-no" name="attend" value="no" />
-            <label for="att-no" data-i18n="aNo">К сожалению, не смогу</label>
-          </div>
-          <div class="guests-row" id="guestsRow">
-            <span class="glbl" data-i18n="fGuests">Количество гостей</span>
-            <input class="num-in" type="number" name="guests" min="1" max="30" value="1" />
-          </div>
-          <textarea class="fld" name="message" data-i18n-ph="fMessage" placeholder="Пожелание молодожёнам"></textarea>
-          <button class="cta" type="submit" data-i18n="btnSend">Отправить</button>
-        </form>
-        <p class="rsvp-status" id="rsvpStatus"></p>
-      </div>
-    </section>
-
-    <!-- Add to calendar + celebrate -->
-    <section class="scene">
-      <img class="floral bl" src="assets/2ba9ddbf019629c9e665135d13065421.png" alt="" />
-      <div class="wrap reveal">
-        <a class="cta" target="_blank" rel="noopener"
-           href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Bek%20%26%20Sofya%20%E2%80%94%20%D0%A1%D0%B2%D0%B0%D0%B4%D1%8C%D0%B1%D0%B0&dates=20260712T090000Z/20260712T140000Z&location=Luna%20Garden%2C%20%D0%9A%D0%BE%D0%B9-%D0%A2%D0%B0%D1%88%2C%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA&details=Luna%20Garden%2C%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA">
-          <span data-i18n="addCalendar">Добавить в календарь</span>
-        </a>
-        <hr class="rule" />
         <p class="lead" data-i18n="celebrate">Будем счастливы разделить этот день вместе с вами.</p>
+        <hr class="rule" />
+        <button class="cta" id="toRsvp" data-i18n="rsvpCta">Подтвердить участие</button>
       </div>
     </section>
 
-    <!-- Closing -->
     <section class="scene" id="closing">
       <div class="bg"></div><div class="veil"></div>
       <div class="wrap reveal">
         <p class="with-love" data-i18n="withLove">С любовью,</p>
         <p class="sign">Bek &amp; Sofya</p>
-        <a class="return" id="returnTop" data-i18n="returnTop" href="#">Вернуться к началу</a>
+        <a class="return" data-nav="top" data-i18n="returnTop" href="#">Вернуться к началу</a>
       </div>
       <div class="pagefoot">B &amp; S · 12.07.2026 · Luna Garden</div>
     </section>
 
   </main>
+
+  <!-- ===== PAGE 3 — RSVP ===== -->
+  <section id="rsvpPage">
+    <div class="rsvp-wrap">
+      <img class="seal3" src="assets/d9ccdf19351f563c73bb962fb01de70f.png" alt="" />
+      <p class="rhead ranim"><span data-i18n="rsvpIntro1">Будем рады, если вы разделите с нами этот праздник.</span><br>
+      <span data-i18n="rsvpIntro2">Пожалуйста, подтвердите участие</span></p>
+
+      <form id="rsvpForm" class="rcard ranim d2">
+        <label class="flabel" data-i18n="fName">Имя и фамилия</label>
+        <input class="fld" type="text" name="name" required />
+
+        <label class="flabel" data-i18n="qAttend">Сможете ли вы прийти?</label>
+        <div class="attend">
+          <input type="radio" id="att-yes" name="attend" value="yes" checked />
+          <label for="att-yes" data-i18n="aYes">С радостью приду</label>
+          <input type="radio" id="att-no" name="attend" value="no" />
+          <label for="att-no" data-i18n="aNo">К сожалению, не смогу</label>
+        </div>
+
+        <div id="guestsRow">
+          <label class="flabel" data-i18n="fGuests">Количество гостей</label>
+          <input class="fld num" type="number" name="guests" min="1" max="30" value="1" />
+        </div>
+
+        <label class="flabel" data-i18n="fMessage">Пожелание молодожёнам</label>
+        <textarea class="fld" name="message"></textarea>
+
+        <button class="cta rsvp-submit" type="submit" data-i18n="btnSend">Отправить</button>
+      </form>
+      <p class="rsvp-status" id="rsvpStatus"></p>
+
+      <div class="rclose ranim d3">
+        <p class="with-love" data-i18n="withLove">С любовью,</p>
+        <p class="sign" style="font-size:clamp(46px,12vw,84px)">Bek &amp; Sofya</p>
+        <a class="return" data-nav="back" data-i18n="returnBack" href="#">Вернуться к приглашению</a>
+      </div>
+    </div>
+  </section>
 
 <script>
   const TARGET = new Date('2026-07-12T15:00:00+06:00');
@@ -301,32 +326,32 @@
     kg:{loveLetter:"Сүйүү каты",openInvitation:"Чакырууну ачуу",saveTheDate:"Бул күндү эсте сактаңыз",
       meetUsIn:"Сиздерди күтөбүз:",city:"Бишкек",venueAddress:"Борбордук көчө, 1г, Кой-Таш айылы, Бишкек",mapButton:"2ГИСтен кароо",
       whenLine:"12-июль 2026, жекшемби күнү",timeLine:"Башталышы: саат 15:00",formalFollow:"Расмий чакыруу кийинчерээк жөнөтүлөт.",
-      cdTitle:"Тойго чейин калды",days:"Күн",hours:"Саат",minutes:"Мүнөт",seconds:"Секунд",
-      addCalendar:"Календарга кошуу",celebrate:"Бул кубанычты сиздер менен бөлүшүүнү чыдамсыздык менен күтөбүз.",
-      withLove:"Сүйүү менен,",returnTop:"Башына кайтуу",
-      rsvpTitle:"Катышууну ырастаңыз",rsvpSub:"Жообуңуз үчүн ыраазыбыз",fName:"Атыңыз жана фамилияңыз",
-      aYes:"Кубаныч менен келем",aNo:"Тилекке каршы, келе албайм",fGuests:"Меймандардын саны",
-      fMessage:"Жаштарга каалоо (милдеттүү эмес)",btnSend:"Жөнөтүү",
+      cdTitle:"Тойго чейин калды",days:"Күн",hours:"Саат",minutes:"Мүнөт",seconds:"Секунд",addCalendar:"Календарга кошуу",
+      celebrate:"Бул кубанычты сиздер менен бөлүшүүнү чыдамсыздык менен күтөбүз.",rsvpCta:"Катышууну ырастоо",
+      withLove:"Сүйүү менен,",returnTop:"Башына кайтуу",returnBack:"Чакырууга кайтуу",
+      rsvpIntro1:"Бул майрамды биз менен бөлүшсөңүз, абдан кубанабыз.",rsvpIntro2:"Сураныч, катышууну ырастаңыз",
+      fName:"Атыңыз жана фамилияңыз",qAttend:"Келе аласызбы?",aYes:"Кубаныч менен келем",aNo:"Тилекке каршы, келе албайм",
+      fGuests:"Меймандардын саны",fMessage:"Жаштарга каалоо (милдеттүү эмес)",btnSend:"Жөнөтүү",
       okThanks:"Рахмат! Жообуңуз кабыл алынды.",sendErr:"Жөнөтүлгөн жок. Кайра аракет кылыңыз."},
     kz:{loveLetter:"Сүйіспеншілік хаты",openInvitation:"Шақыруды ашу",saveTheDate:"Бұл күнді есте сақтаңыз",
       meetUsIn:"Сіздерді күтеміз:",city:"Бішкек",venueAddress:"Орталық көше, 1г, Қой-Таш ауылы, Бішкек",mapButton:"2ГИС-тен қарау",
       whenLine:"2026 жылғы 12 шілде, жексенбі",timeLine:"Басталуы: сағат 15:00",formalFollow:"Ресми шақыру кейінірек жіберіледі.",
-      cdTitle:"Тойға дейін қалды",days:"Күн",hours:"Сағат",minutes:"Минут",seconds:"Секунд",
-      addCalendar:"Күнтізбеге қосу",celebrate:"Бұл қуанышты сіздермен бірге тойлауды асыға күтеміз.",
-      withLove:"Сүйіспеншілікпен,",returnTop:"Басына оралу",
-      rsvpTitle:"Қатысуыңызды растаңыз",rsvpSub:"Жауабыңыз үшін алғыс айтамыз",fName:"Атыңыз бен тегіңіз",
-      aYes:"Қуанышпен келемін",aNo:"Өкінішке қарай, келе алмаймын",fGuests:"Қонақтар саны",
-      fMessage:"Жастарға тілек (қаласаңыз)",btnSend:"Жіберу",
+      cdTitle:"Тойға дейін қалды",days:"Күн",hours:"Сағат",minutes:"Минут",seconds:"Секунд",addCalendar:"Күнтізбеге қосу",
+      celebrate:"Бұл қуанышты сіздермен бірге тойлауды асыға күтеміз.",rsvpCta:"Қатысуды растау",
+      withLove:"Сүйіспеншілікпен,",returnTop:"Басына оралу",returnBack:"Шақыруға оралу",
+      rsvpIntro1:"Осы мерекені бізбен бөліссеңіз, қуанышты боламыз.",rsvpIntro2:"Өтінеміз, қатысуыңызды растаңыз",
+      fName:"Атыңыз бен тегіңіз",qAttend:"Келе аласыз ба?",aYes:"Қуанышпен келемін",aNo:"Өкінішке қарай, келе алмаймын",
+      fGuests:"Қонақтар саны",fMessage:"Жастарға тілек (қаласаңыз)",btnSend:"Жіберу",
       okThanks:"Рахмет! Жауабыңыз қабылданды.",sendErr:"Жіберілмеді. Қайталап көріңіз."},
     ru:{loveLetter:"Письмо с любовью от",openInvitation:"Открыть приглашение",saveTheDate:"Сохраните дату",
       meetUsIn:"Будем рады видеть вас в",city:"Бишкек",venueAddress:"Центральная ул., 1г, с. Кой-Таш, Бишкек",mapButton:"Открыть в 2ГИС",
       whenLine:"воскресенье, 12 июля 2026",timeLine:"Начало в 15:00",formalFollow:"Официальное приглашение последует.",
-      cdTitle:"До праздника осталось",days:"Дней",hours:"Часов",minutes:"Минут",seconds:"Секунд",
-      addCalendar:"Добавить в календарь",celebrate:"Будем счастливы разделить этот день вместе с вами.",
-      withLove:"С любовью,",returnTop:"Вернуться к началу",
-      rsvpTitle:"Подтвердите участие",rsvpSub:"Будем признательны за ваш ответ",fName:"Имя и фамилия",
-      aYes:"С радостью приду",aNo:"К сожалению, не смогу",fGuests:"Количество гостей",
-      fMessage:"Пожелание молодожёнам (по желанию)",btnSend:"Отправить",
+      cdTitle:"До праздника осталось",days:"Дней",hours:"Часов",minutes:"Минут",seconds:"Секунд",addCalendar:"Добавить в календарь",
+      celebrate:"Будем счастливы разделить этот день вместе с вами.",rsvpCta:"Подтвердить участие",
+      withLove:"С любовью,",returnTop:"Вернуться к началу",returnBack:"Вернуться к приглашению",
+      rsvpIntro1:"Будем рады, если вы разделите с нами этот праздник.",rsvpIntro2:"Пожалуйста, подтвердите участие",
+      fName:"Имя и фамилия",qAttend:"Сможете ли вы прийти?",aYes:"С радостью приду",aNo:"К сожалению, не смогу",
+      fGuests:"Количество гостей",fMessage:"Пожелание молодожёнам (по желанию)",btnSend:"Отправить",
       okThanks:"Спасибо! Мы получили ваш ответ.",sendErr:"Не удалось отправить. Попробуйте ещё раз."}
   };
 
@@ -342,8 +367,9 @@
   let saved='ru'; try{saved=localStorage.getItem('std-lang')||'ru';}catch(e){}
   setLang(saved);
 
-  // opening letter
-  const intro=document.getElementById('intro'), book=document.getElementById('book');
+  const intro=document.getElementById('intro'), book=document.getElementById('book'), rsvpPage=document.getElementById('rsvpPage');
+
+  // PAGE 1 -> 2
   function openLetter(){
     if(intro.classList.contains('opening'))return;
     intro.classList.add('opening');
@@ -353,16 +379,23 @@
   document.getElementById('openBtn').addEventListener('click',openLetter);
   document.getElementById('envelope').addEventListener('click',openLetter);
   document.getElementById('envelope').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLetter();}});
-  document.getElementById('returnTop').addEventListener('click',e=>{
-    e.preventDefault(); book.scrollTo({top:0,behavior:'smooth'});
-    intro.style.display='flex';
-    requestAnimationFrame(()=>{intro.classList.remove('opened','opening');document.body.style.overflow='hidden';});
-  });
+
+  // PAGE 2 -> 3 and back; -> top
+  document.getElementById('toRsvp').addEventListener('click',()=>{rsvpPage.classList.add('open');rsvpPage.scrollTop=0;});
+  document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); const nav=a.getAttribute('data-nav');
+    if(nav==='back'){ rsvpPage.classList.remove('open'); }
+    else if(nav==='top'){
+      book.scrollTo({top:0,behavior:'smooth'});
+      intro.style.display='flex';
+      requestAnimationFrame(()=>{intro.classList.remove('opened','opening');document.body.style.overflow='hidden';});
+    }
+  }));
 
   // reveal on scroll
   const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in');}),{root:book,threshold:.16});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-  document.querySelector('.scene .reveal').classList.add('in');
+  document.querySelectorAll('#book .reveal').forEach(el=>io.observe(el));
+  document.querySelector('#book .reveal').classList.add('in');
 
   // countdown
   const pad=(n,l)=>String(n).padStart(l,'0');
@@ -376,7 +409,7 @@
   }
   tick(); setInterval(tick,1000);
 
-  // RSVP form
+  // RSVP submit
   const form=document.getElementById('rsvpForm'), statusEl=document.getElementById('rsvpStatus'), guestsRow=document.getElementById('guestsRow');
   document.querySelectorAll('input[name="attend"]').forEach(r=>r.addEventListener('change',()=>{
     guestsRow.style.display=(document.querySelector('input[name="attend"]:checked').value==='no')?'none':'';
