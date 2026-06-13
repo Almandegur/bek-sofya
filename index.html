@@ -42,6 +42,15 @@
   .lang button.active{background:var(--sage);border-color:var(--sage);color:#fff;}
   @media(max-width:440px){.lang button{padding:4px 11px;font-size:14px;}}
 
+  /* back button */
+  .backbtn{position:fixed;top:13px;left:14px;z-index:210;display:none;align-items:center;gap:6px;
+    font-family:var(--serif);font-size:16px;letter-spacing:.07em;color:var(--gold);
+    background:rgba(255,250,244,.78);border:1px solid var(--line);border-radius:999px;padding:6px 16px;cursor:pointer;transition:all .25s ease;}
+  .backbtn:hover{border-color:var(--sage);background:#fff;transform:translateX(-2px);}
+  .backbtn.show{display:inline-flex;}
+  .bk-arrow{font-size:18px;line-height:1;}
+  @media(max-width:440px){.backbtn{font-size:14px;padding:5px 12px;left:8px;}}
+
   /* ===== PAGE 1 — letter ===== */
   #intro{position:fixed;inset:0;z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding:74px 22px 38px;overflow:hidden;background:var(--ivory);
@@ -89,6 +98,10 @@
   @media(max-width:560px){.floral.tr{width:148px;right:-48px;}.floral.bl{width:140px;left:-52px;}}
 
   hr.rule{border:none;border-top:1px solid var(--line);width:120px;margin:24px auto;}
+
+  /* hero (real capture of the original collage) */
+  .hero-scene{padding-top:80px;}
+  .hero-img{display:block;width:100%;max-width:1100px;height:auto;margin:0 auto;}
 
   /* save-the-date collage */
   .collage{position:relative;display:flex;flex-direction:column;align-items:center;gap:24px;}
@@ -185,6 +198,7 @@
     <button data-lang="kz">Қазақша</button>
     <button data-lang="ru">Русский</button>
   </nav>
+  <button id="backBtn" class="backbtn" aria-label="Back"><span class="bk-arrow">←</span><span data-i18n="back">Назад</span></button>
 
   <!-- ===== PAGE 1 — LETTER ===== -->
   <section id="intro">
@@ -205,23 +219,9 @@
   <!-- ===== PAGE 2 — INFO ===== -->
   <main id="book">
 
-    <section class="scene">
-      <img class="floral tr" src="assets/2ba9ddbf019629c9e665135d13065421.png" alt="" />
+    <section class="scene hero-scene">
       <div class="wrap reveal">
-        <div class="collage">
-          <div class="std-card">
-            <div class="std-inner">
-              <p class="std-eyebrow" data-i18n="saveTheDate">Сохраните дату</p>
-              <p class="std-title">Bek &amp; Sofya</p>
-              <p class="std-mono">B &amp; S</p>
-              <p class="std-date">12 · 07 · 2026</p>
-            </div>
-          </div>
-          <div class="photos">
-            <div class="frame frame-arch ph-left"><img src="assets/81a594e507fe25ad2d1da79de559a3fe.jpg" alt="" loading="lazy" /></div>
-            <div class="frame frame-poly ph-right"><img src="assets/6e0e698717c6428e445cb55d65e9ccd0.jpg" alt="" loading="lazy" /></div>
-          </div>
-        </div>
+        <img class="hero-img" src="assets/hero.jpg" alt="Save the Date · Bek & Sofya · 12.07.2026" />
       </div>
     </section>
 
@@ -328,7 +328,7 @@
       whenLine:"12-июль 2026, жекшемби күнү",timeLine:"Башталышы: саат 15:00",formalFollow:"Расмий чакыруу кийинчерээк жөнөтүлөт.",
       cdTitle:"Тойго чейин калды",days:"Күн",hours:"Саат",minutes:"Мүнөт",seconds:"Секунд",addCalendar:"Календарга кошуу",
       celebrate:"Бул кубанычты сиздер менен бөлүшүүнү чыдамсыздык менен күтөбүз.",rsvpCta:"Катышууну ырастоо",
-      withLove:"Сүйүү менен,",returnTop:"Башына кайтуу",returnBack:"Чакырууга кайтуу",
+      withLove:"Сүйүү менен,",returnTop:"Башына кайтуу",returnBack:"Чакырууга кайтуу",back:"Артка",
       rsvpIntro1:"Бул майрамды биз менен бөлүшсөңүз, абдан кубанабыз.",rsvpIntro2:"Сураныч, катышууну ырастаңыз",
       fName:"Атыңыз жана фамилияңыз",qAttend:"Келе аласызбы?",aYes:"Кубаныч менен келем",aNo:"Тилекке каршы, келе албайм",
       fGuests:"Меймандардын саны",fMessage:"Жаштарга каалоо (милдеттүү эмес)",btnSend:"Жөнөтүү",
@@ -338,7 +338,7 @@
       whenLine:"2026 жылғы 12 шілде, жексенбі",timeLine:"Басталуы: сағат 15:00",formalFollow:"Ресми шақыру кейінірек жіберіледі.",
       cdTitle:"Тойға дейін қалды",days:"Күн",hours:"Сағат",minutes:"Минут",seconds:"Секунд",addCalendar:"Күнтізбеге қосу",
       celebrate:"Бұл қуанышты сіздермен бірге тойлауды асыға күтеміз.",rsvpCta:"Қатысуды растау",
-      withLove:"Сүйіспеншілікпен,",returnTop:"Басына оралу",returnBack:"Шақыруға оралу",
+      withLove:"Сүйіспеншілікпен,",returnTop:"Басына оралу",returnBack:"Шақыруға оралу",back:"Артқа",
       rsvpIntro1:"Осы мерекені бізбен бөліссеңіз, қуанышты боламыз.",rsvpIntro2:"Өтінеміз, қатысуыңызды растаңыз",
       fName:"Атыңыз бен тегіңіз",qAttend:"Келе аласыз ба?",aYes:"Қуанышпен келемін",aNo:"Өкінішке қарай, келе алмаймын",
       fGuests:"Қонақтар саны",fMessage:"Жастарға тілек (қаласаңыз)",btnSend:"Жіберу",
@@ -348,7 +348,7 @@
       whenLine:"воскресенье, 12 июля 2026",timeLine:"Начало в 15:00",formalFollow:"Официальное приглашение последует.",
       cdTitle:"До праздника осталось",days:"Дней",hours:"Часов",minutes:"Минут",seconds:"Секунд",addCalendar:"Добавить в календарь",
       celebrate:"Будем счастливы разделить этот день вместе с вами.",rsvpCta:"Подтвердить участие",
-      withLove:"С любовью,",returnTop:"Вернуться к началу",returnBack:"Вернуться к приглашению",
+      withLove:"С любовью,",returnTop:"Вернуться к началу",returnBack:"Вернуться к приглашению",back:"Назад",
       rsvpIntro1:"Будем рады, если вы разделите с нами этот праздник.",rsvpIntro2:"Пожалуйста, подтвердите участие",
       fName:"Имя и фамилия",qAttend:"Сможете ли вы прийти?",aYes:"С радостью приду",aNo:"К сожалению, не смогу",
       fGuests:"Количество гостей",fMessage:"Пожелание молодожёнам (по желанию)",btnSend:"Отправить",
@@ -367,13 +367,19 @@
   let saved='ru'; try{saved=localStorage.getItem('std-lang')||'ru';}catch(e){}
   setLang(saved);
 
-  const intro=document.getElementById('intro'), book=document.getElementById('book'), rsvpPage=document.getElementById('rsvpPage');
+  const intro=document.getElementById('intro'), book=document.getElementById('book'), rsvpPage=document.getElementById('rsvpPage'), backBtn=document.getElementById('backBtn');
+  function gotoLetter(){
+    book.scrollTo({top:0,behavior:'smooth'}); rsvpPage.classList.remove('open');
+    intro.style.display='flex';
+    requestAnimationFrame(()=>{intro.classList.remove('opened','opening');document.body.style.overflow='hidden';});
+    backBtn.classList.remove('show');
+  }
 
   // PAGE 1 -> 2
   function openLetter(){
     if(intro.classList.contains('opening'))return;
     intro.classList.add('opening');
-    setTimeout(()=>{intro.classList.add('opened');document.body.style.overflow='';},650);
+    setTimeout(()=>{intro.classList.add('opened');document.body.style.overflow='';backBtn.classList.add('show');},650);
     setTimeout(()=>{intro.style.display='none';},1750);
   }
   document.getElementById('openBtn').addEventListener('click',openLetter);
@@ -385,12 +391,13 @@
   document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',e=>{
     e.preventDefault(); const nav=a.getAttribute('data-nav');
     if(nav==='back'){ rsvpPage.classList.remove('open'); }
-    else if(nav==='top'){
-      book.scrollTo({top:0,behavior:'smooth'});
-      intro.style.display='flex';
-      requestAnimationFrame(()=>{intro.classList.remove('opened','opening');document.body.style.overflow='hidden';});
-    }
+    else if(nav==='top'){ gotoLetter(); }
   }));
+  // persistent back button: page 3 -> page 2, else page 2 -> letter
+  backBtn.addEventListener('click',()=>{
+    if(rsvpPage.classList.contains('open')) rsvpPage.classList.remove('open');
+    else gotoLetter();
+  });
 
   // reveal on scroll
   const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in');}),{root:book,threshold:.16});
