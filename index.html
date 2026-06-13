@@ -109,13 +109,15 @@
   .std-names{font-variant:small-caps;letter-spacing:.18em;color:var(--olive);font-size:clamp(18px,4.4vw,26px);}
   .std-date{font-family:'Cormorant Garamond',serif;letter-spacing:.24em;color:var(--gold-deep);font-size:clamp(17px,4vw,23px);margin-top:8px;}
   /* scene 1 photo collage */
-  .collage{position:relative;display:flex;flex-direction:column;align-items:center;gap:20px;}
-  .frame{width:138px;background:#fff;box-shadow:0 18px 32px -16px rgba(110,106,69,.55);}
+  .collage{position:relative;display:flex;flex-direction:column;align-items:center;gap:24px;}
+  .photos{display:flex;gap:14px;justify-content:center;align-items:flex-start;}
+  .frame{width:clamp(116px,38vw,150px);background:#fff;box-shadow:0 18px 32px -16px rgba(110,106,69,.55);}
   .frame img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--cream);}
-  .frame-arch{padding:7px;background:#f4edda;border:1px solid var(--sage);border-radius:96px 96px 7px 7px;}
-  .frame-arch img{border-radius:90px 90px 3px 3px;}
-  .frame-poly{padding:7px 7px 22px;background:#fff;}
+  .frame-arch{padding:7px;background:#f4edda;border:1px solid var(--sage);border-radius:90px 90px 7px 7px;transform:rotate(-5deg);}
+  .frame-arch img{border-radius:84px 84px 3px 3px;}
+  .frame-poly{padding:7px 7px 20px;background:#fff;transform:rotate(5deg);}
   @media(min-width:900px){
+    .photos{display:contents;}
     .frame{position:absolute;width:clamp(152px,14vw,188px);}
     .frame-arch.ph-left{left:-184px;top:30px;transform:rotate(-6deg);}
     .frame-poly.ph-right{right:-176px;bottom:14px;transform:rotate(6deg);}
@@ -194,7 +196,6 @@
       <img class="floral tr" src="assets/2ba9ddbf019629c9e665135d13065421.png" alt="" />
       <div class="wrap reveal">
         <div class="collage">
-          <div class="frame frame-arch ph-left"><img src="assets/81a594e507fe25ad2d1da79de559a3fe.jpg" alt="" loading="lazy" /></div>
           <div class="std-card">
             <div class="std-inner">
               <p class="std-eyebrow" data-i18n="saveTheDate">Сохраните дату</p>
@@ -203,7 +204,10 @@
               <p class="std-date">12 · 07 · 2026</p>
             </div>
           </div>
-          <div class="frame frame-poly ph-right"><img src="assets/6e0e698717c6428e445cb55d65e9ccd0.jpg" alt="" loading="lazy" /></div>
+          <div class="photos">
+            <div class="frame frame-arch ph-left"><img src="assets/81a594e507fe25ad2d1da79de559a3fe.jpg" alt="" loading="lazy" /></div>
+            <div class="frame frame-poly ph-right"><img src="assets/6e0e698717c6428e445cb55d65e9ccd0.jpg" alt="" loading="lazy" /></div>
+          </div>
         </div>
       </div>
     </section>
@@ -333,6 +337,9 @@
     document.documentElement.lang=lang;
     document.querySelectorAll('[data-i18n]').forEach(el=>{
       const k=el.getAttribute('data-i18n'); if(d[k]!==undefined) el.textContent=d[k];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+      const k=el.getAttribute('data-i18n-ph'); if(d[k]!==undefined) el.placeholder=d[k];
     });
     document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
     try{localStorage.setItem('std-lang',lang);}catch(e){}
