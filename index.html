@@ -55,7 +55,7 @@
 
   /* ===== PAGE 1 — letter ===== */
   #intro{position:fixed;inset:0;z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:74px 22px 38px;overflow:hidden;background:var(--ivory);
+    text-align:center;padding:92px 22px 40px;overflow:hidden;background:var(--ivory);
     transition:transform 1.05s cubic-bezier(.7,0,.2,1),opacity 1.05s ease;}
   #intro .bg{position:absolute;inset:0;background:url('assets/29fa99195a0e258212f841317c595d0a.png') center/cover no-repeat;opacity:.3;}
   #intro .veil{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(255,250,244,.5),rgba(255,250,244,.85) 78%);}
@@ -66,10 +66,10 @@
   #intro .envelope{animation:envIn 1.1s .42s both;}
   #intro .open-btn{animation:fadeUp .9s .92s both;}
   #intro .envelope .seal{animation:sealStamp 1s 1.05s backwards;}
-  .wedding-line{font-family:var(--serif);font-weight:300;color:var(--gold);font-size:clamp(18px,3.8vw,26px);letter-spacing:.03em;margin:-10px 0 24px;}
+  .wedding-line{font-family:var(--serif);font-weight:300;color:var(--gold);font-size:clamp(17px,3.6vw,24px);letter-spacing:.03em;margin:2px 0 22px;}
   .eyebrow{font-family:var(--serif);font-weight:300;letter-spacing:.16em;color:var(--gold);font-size:clamp(18px,4vw,30px);}
-  #intro .names{font-family:var(--script);color:var(--gold);font-size:clamp(58px,15vw,120px);margin:2px 0 22px;}
-  .envelope{position:relative;width:clamp(258px,42vw,400px);filter:drop-shadow(0 26px 30px rgba(110,98,60,.3));cursor:pointer;}
+  #intro .names{font-family:var(--script);color:var(--gold);font-size:clamp(46px,10vw,86px);margin:2px 0 6px;}
+  .envelope{position:relative;width:min(clamp(220px,72vw,310px),30vh);filter:drop-shadow(0 26px 30px rgba(110,98,60,.3));cursor:pointer;}
   .env-float{animation:floatEnv 5.5s ease-in-out infinite;transition:transform .9s ease,opacity .9s ease;}
   .envelope .env-img{width:100%;border-radius:4px;}
   .envelope .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);width:31%;transition:transform .8s ease,opacity .8s ease;}
