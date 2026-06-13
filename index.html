@@ -326,7 +326,8 @@
 
 <script>
   const TARGET = new Date('2026-07-12T15:00:00+06:00');
-  const RSVP_EMAIL = atob('ZGFuZ2VyLnRyYWRpbmcwN0BnbWFpbC5jb20=');
+  const GFORM='https://docs.google.com/forms/d/e/1FAIpQLSd5wovZUazHvaPUYClZrQHi7NrSC4Ga-VTPRJFAWQbdyHKa-g/formResponse';
+  const GF={name:'entry.292207497',attend:'entry.1730113157',guests:'entry.445228437',message:'entry.898406194'};
 
   const I18N = {
     kg:{loveLetter:"Сүйүү каты",weddingLine:"сиздерди тоюна чакырышат",openInvitation:"Чакырууну ачуу",saveTheDate:"Бул күндү эсте сактаңыз",
@@ -431,16 +432,15 @@
     e.preventDefault();
     const d=I18N[document.documentElement.lang]||I18N.ru;
     const attendV=document.querySelector('input[name="attend"]:checked').value;
-    const payload={_subject:'RSVP — Bek & Sofya',
-      Имя:form.querySelector('[name="name"]').value.trim(),
-      Ответ:attendV==='yes'?'Придёт ✓':'Не сможет ✕',
-      Гостей:attendV==='yes'?form.querySelector('[name="guests"]').value:'0',
-      Сообщение:form.querySelector('[name="message"]').value.trim()};
+    const body=new URLSearchParams();
+    body.append(GF.name, form.querySelector('[name="name"]').value.trim());
+    body.append(GF.attend, attendV==='yes'?'Придет':'Не Придет');
+    body.append(GF.guests, attendV==='yes'?form.querySelector('[name="guests"]').value:'0');
+    body.append(GF.message, form.querySelector('[name="message"]').value.trim());
+    body.append('fvv','1'); body.append('pageHistory','0');
     statusEl.textContent='…';
     try{
-      const res=await fetch('https://formsubmit.co/ajax/'+RSVP_EMAIL,{method:'POST',
-        headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
-      if(!res.ok) throw 0;
+      await fetch(GFORM,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
       form.style.display='none'; statusEl.textContent=d.okThanks;
     }catch(err){ statusEl.textContent=d.sendErr; }
   });
