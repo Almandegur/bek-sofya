@@ -105,8 +105,9 @@
   hr.rule{border:none;border-top:1px solid var(--line);width:120px;margin:24px auto;}
 
   /* hero (real capture of the original collage) — fills the frame */
-  .hero-scene{padding:66px 0 6px;}
+  .hero-scene{padding:66px 0 0;justify-content:flex-end;}
   .hero-scene .wrap{max-width:none;}
+  .hero-img{vertical-align:bottom;}
   .hero-img{display:block;width:100%;max-width:min(100%, calc((100svh - 76px) * 1.6));height:auto;margin:0 auto;}
 
   /* save-the-date collage */
@@ -167,9 +168,11 @@
   .return:hover{color:var(--olive);}
   .pagefoot{position:relative;z-index:3;margin-top:30px;font-family:var(--serif);font-weight:300;color:var(--olive);font-size:14px;letter-spacing:.10em;opacity:.85;}
 
-  /* mobile only: merge frame 3 (date + countdown) and frame 4 (RSVP button) into one screen */
+  /* mobile only: merge frames 1+2 (pictures + place) and 3+4 (date/countdown + RSVP) into single screens */
   @media(max-width:700px){
-    #book .scene:nth-of-type(3){min-height:auto;padding:90px 24px 12px;}
+    #book .scene:nth-of-type(1){min-height:auto;padding:58px 0 0;}
+    #book .scene:nth-of-type(2){min-height:auto;padding:22px 24px 44px;scroll-snap-align:none;}
+    #book .scene:nth-of-type(3){min-height:auto;padding:80px 24px 12px;}
     #book .scene:nth-of-type(4){min-height:auto;padding:6px 24px 48px;scroll-snap-align:none;}
   }
 
