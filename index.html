@@ -174,8 +174,9 @@
     #book .scene:nth-of-type(2){min-height:auto;padding:22px 24px 44px;scroll-snap-align:none;}
     #book .scene:nth-of-type(3){min-height:auto;padding:80px 24px 12px;}
     #book .scene:nth-of-type(4){min-height:auto;padding:6px 24px 48px;scroll-snap-align:none;}
-    .floral{display:none;}  /* extra floating florals overlap text on phones; hero collage keeps its own */
   }
+  /* hide floating florals whenever the viewport is too narrow for them to sit clear of the centered text */
+  @media(max-width:1180px){ .floral{display:none;} }
 
   /* ===== PAGE 3 — RSVP (slides in) ===== */
   #rsvpPage{position:fixed;inset:0;z-index:160;background:var(--ivory);overflow-y:auto;
